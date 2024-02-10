@@ -118,8 +118,8 @@ def calculate_time_difference(posted_time):
     else:
         return "just now"
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 
 # TODO: Use Werkzeug to hash the user's password when creating a new user.
