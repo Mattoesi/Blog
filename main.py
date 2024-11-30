@@ -20,6 +20,7 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///posts.db") + "?sslmode=require"
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 csrf = CSRFProtect(app)
@@ -314,6 +315,20 @@ def about():
 @app.route("/contact")
 def contact():
     return render_template("contact.html", current_user=current_user)
+
+
+@app.route('/debug-db')
+def debug_db():
+    """
+    Debug route to test database connection.
+    """
+    try:
+        engine = db.get_engine()
+        connection = engine.connect()
+        connection.close()
+        return "Database connection successful!", 200
+    except Exception as e:
+        return f"Database connection error: {str(e)}", 500
 
 
 if __name__ == "__main__":
