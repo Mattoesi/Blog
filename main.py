@@ -25,8 +25,6 @@ ckeditor = CKEditor(app)
 Bootstrap5(app)
 csrf = CSRFProtect(app)
 
-with app.app_context():
-    db.create_all()
 
 gravatar = Gravatar(app,
                     size=100,
