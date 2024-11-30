@@ -20,7 +20,7 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:////data/posts.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///:memory:"
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 csrf = CSRFProtect(app)
