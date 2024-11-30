@@ -57,6 +57,10 @@ db = SQLAlchemy(app)
 # db.init_app(app)
 
 
+with app.app_context():
+    db.create_all()
+
+
 # CONFIGURE TABLES
 
 # TODO: Create a User table for all your registered users.
@@ -119,9 +123,6 @@ def calculate_time_difference(posted_time):
         return f"{minutes} minutes ago"
     else:
         return "just now"
-
-with app.app_context():
-    db.create_all()
 
 
 # TODO: Use Werkzeug to hash the user's password when creating a new user.
