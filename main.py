@@ -82,12 +82,10 @@ class BlogPost(db.Model):
     subtitle = db.Column(db.String(250), nullable=False)
     date = db.Column(db.String(250), nullable=False)
     body = db.Column(db.Text, nullable=False)
-    author = db.Column(db.String(250), nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
-    author = relationship('User', back_populates='blogposts')
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = relationship('User', back_populates='blogposts')
     comments = relationship('Comment', back_populates='parent_post')
-
 
 class Comment(db.Model):
     __tablename__ = "comments"
