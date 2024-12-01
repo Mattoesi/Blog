@@ -319,18 +319,14 @@ def contact():
     return render_template("contact.html", current_user=current_user)
 
 
-@app.route('/debug-db')
-def debug_db():
-    """
-    Debug route to test database connection.
-    """
+@app.route('/execute-sql')
+def execute_sql():
     try:
-        engine = db.get_engine()
-        connection = engine.connect()
-        connection.close()
-        return "Database connection successful!", 200
+        db.session.execute("CREATE TABLE test_table (id SERIAL PRIMARY KEY, name TEXT)")
+        db.session.commit()
+        return "SQL executed successfully"
     except Exception as e:
-        return f"Database connection error: {str(e)}", 500
+        return f"Error: {e}"
 
 if __name__ == "__main__":
     app.run(debug=False, port=5002)
